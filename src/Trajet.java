@@ -8,12 +8,11 @@ public class Trajet {
 	private Limousine limousine;
 	private Chauffeur chauffeur;
 	
-	Trajet(String villeDepart, String villeArrivee, int kilometrageDepart, Limousine limousine, Chauffeur chauffeur){
+	Trajet(String villeDepart, String villeArrivee, int kilometrageDepart, Limousine limousine){
 		this.villeDepart = villeDepart;
 		this.villeArrivee = villeArrivee;
 		this.kilometrageDepart = kilometrageDepart;
 		this.limousine = limousine;
-		this.chauffeur = chauffeur;
 	}
 	
 	public String getVilleDepart() {
@@ -45,5 +44,16 @@ public class Trajet {
 	}
 	public void setLimousine(Limousine limousine) {
 		this.limousine = limousine;
+	}
+	
+	public void afficherCaracteristiques(){
+		System.out.println("------Caracteristiques du trajet------");
+		System.out.println("Ville de depart : " + villeDepart);
+		System.out.println("Ville d'arrivee : " + villeArrivee);
+		System.out.println("Kilometrage de depart : " + kilometrageDepart);
+		//System.out.println("Kilmetrage d'arrivee : " + adresse);
+		limousine.afficherCaracteristiques();
+		System.out.println("-----------------------------------------");
+		System.out.println();
 	}
 }

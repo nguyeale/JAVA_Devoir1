@@ -38,10 +38,13 @@ public class Limousine {
 		this.couleur = couleur;
 	}
 	
-	public void showLimousine(){
-		System.out.println(numeroImmatriculation);
-		System.out.println(capaciteReservoir);
-		System.out.println(nombrePassagers);
-		System.out.println(couleur);
+	public void afficherCaracteristiques(){
+		System.out.println("------Caracteristiques de la limousine------");
+		System.out.println("Numero d'immatriculation : " + numeroImmatriculation);
+		System.out.println("Capacite du reservoir : " + capaciteReservoir);
+		System.out.println("Nombre de passagers : " + nombrePassagers);
+		System.out.println("Couleur : " + couleur);
+		System.out.println("-----------------------------------------");
+		System.out.println();
 	}
 }

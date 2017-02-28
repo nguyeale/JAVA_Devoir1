@@ -12,12 +12,14 @@ public class Chauffeur {
 	private final int NOMBRE_DE_TRAJET_DEFAULT = 100;
 	
 	
-	Chauffeur(String nom, String prenom, int anneeEmbauche, String adresse, String numeroIdentification) {
+	Chauffeur(String nom, String prenom, int anneeEmbauche, String adresse) {
+		String anneeStr = Integer.toString(anneeEmbauche);
 		this.nom = nom;
 		this.prenom = prenom;
 		this.anneeEmbauche = anneeEmbauche;
 		this.adresse = adresse;
-		this.numeroIdentification = numeroIdentification;
+		this.numeroIdentification = (String)nom.subSequence(0, 3) + prenom.charAt(0) //  numero composé des 3 premiers caracteres du nom, du 1er du prénom
+										+ anneeStr.subSequence(anneeStr.length() - 2, anneeStr.length()); // et des deux derniers chiffres de l'année d'embauche
 		this.listeTrajets = new ArrayList<Trajet>();
 	}
 	
@@ -51,6 +53,21 @@ public class Chauffeur {
 	}
 	public void setNumeroIdentification(String numeroIdentification) {
 		this.numeroIdentification = numeroIdentification;
+	}
+	
+	public void afficherCaracteristiques(){
+		System.out.println("------Caracteristiques du chauffeur------");
+		System.out.println("Nom : " + nom);
+		System.out.println("Prenom : " + prenom);
+		System.out.println("Annee d'embauche : " + anneeEmbauche);
+		System.out.println("Adresse : " + adresse);
+		System.out.println("Numero d'immatriculation : " + numeroIdentification);
+		System.out.println("Liste de trajet :");
+		for(int i = 0; i < listeTrajets.size(); i++) {
+			System.out.println("- Trajet " + i + " :" + listeTrajets.get(i));
+		}
+		System.out.println("-----------------------------------------");
+		System.out.println();
 	}
 
 	
