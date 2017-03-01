@@ -12,15 +12,21 @@ public class Chauffeur {
 	private final int NOMBRE_DE_TRAJET_DEFAULT = 100;
 	
 	
-	Chauffeur(String nom, String prenom, int anneeEmbauche, String adresse) {
-		String anneeStr = Integer.toString(anneeEmbauche);
-		this.nom = nom;
-		this.prenom = prenom;
-		this.anneeEmbauche = anneeEmbauche;
-		this.adresse = adresse;
-		this.numeroIdentification = (String)nom.subSequence(0, 3) + prenom.charAt(0) //  numero composé des 3 premiers caracteres du nom, du 1er du prénom
-										+ anneeStr.subSequence(anneeStr.length() - 2, anneeStr.length()); // et des deux derniers chiffres de l'année d'embauche
-		this.listeTrajets = new ArrayList<Trajet>();
+	Chauffeur(String nom, String prenom, int anneeEmbauche, String adresse) throws AnneeChauffeurException {
+		int annee = Calendar.getInstance().get(Calendar.YEAR);
+			if(anneeEmbauche > annee) {
+				throw new AnneeChauffeurException();
+			}
+			else {
+				String anneeStr = Integer.toString(anneeEmbauche);
+				this.nom = nom;
+				this.prenom = prenom;
+				this.anneeEmbauche = anneeEmbauche;
+				this.adresse = adresse;
+				this.numeroIdentification = (String)nom.subSequence(0, 3) + prenom.charAt(0) //  numero composé des 3 premiers caracteres du nom, du 1er du prénom
+												+ anneeStr.subSequence(anneeStr.length() - 2, anneeStr.length()); // et des deux derniers chiffres de l'année d'embauche
+				this.listeTrajets = new ArrayList<Trajet>();
+			}
 	}
 	
 	
@@ -53,6 +59,40 @@ public class Chauffeur {
 	}
 	public void setNumeroIdentification(String numeroIdentification) {
 		this.numeroIdentification = numeroIdentification;
+	}
+	
+	public void ajouterTrajet(String villeDepart, String villeArrivee, int kilometrageDepart, int kilometrageArrivee, Limousine limousine){
+		Trajet trajet=new Trajet(villeDepart,villeArrivee,kilometrageDepart, kilometrageArrivee, limousine);
+		this.listeTrajets.add(trajet);
+	}
+	
+	public void ajouterReservation(String villeDepart, String villeArrivee, int kilometrageDepart, Limousine limousine){
+		Trajet trajet=new Trajet(villeDepart,villeArrivee,kilometrageDepart,limousine);
+		this.listeTrajets.add(trajet);
+	}
+	
+	public ArrayList<Limousine> getListLimousine(){
+		ArrayList<Limousine> listeLimousine = new ArrayList<Limousine>();
+		for(int i=0;i<listeTrajets.size();i++){
+			listeLimousine.add(listeTrajets.get(i).getLimousine());
+		}
+		return listeLimousine;
+	}
+	
+	public boolean trouverLimousine(Limousine limousine){
+		for(int i=0;i<listeTrajets.size();i++){
+			if(listeTrajets.get(i).getLimousine().getNumeroImmatriculation().equals(limousine.getNumeroImmatriculation()))
+				return true;
+		}
+		return false;
+	}
+	
+	public void afficherTrajetEffectue(){
+		for(int i=0;i<listeTrajets.size();i++){
+			if(listeTrajets.get(i).getKilometrageArrivee()!=-1){
+				listeTrajets.get(i).afficherCaracteristiques();
+			}
+		}
 	}
 	
 	public void afficherCaracteristiques(){

@@ -4,14 +4,22 @@ public class Trajet {
 	private String villeDepart;
 	private String villeArrivee;
 	private int kilometrageDepart;
-	private int kilometrageArrivee;
+	private int kilometrageArrivee; // Si le kilometrage d'arrivee vaut -1, cela signifie que le trajet n'a pas encore été effectué
 	private Limousine limousine;
-	private Chauffeur chauffeur;
 	
-	Trajet(String villeDepart, String villeArrivee, int kilometrageDepart, Limousine limousine){
+	Trajet(String villeDepart, String villeArrivee, int kilometrageDepart, Limousine limousine){ // Reservation
 		this.villeDepart = villeDepart;
 		this.villeArrivee = villeArrivee;
 		this.kilometrageDepart = kilometrageDepart;
+		this.kilometrageArrivee = -1;
+		this.limousine = limousine;
+	}
+	
+	Trajet(String villeDepart, String villeArrivee, int kilometrageDepart, int kilometrageArrivee, Limousine limousine){
+		this.villeDepart = villeDepart;
+		this.villeArrivee = villeArrivee;
+		this.kilometrageDepart = kilometrageDepart;
+		this.kilometrageArrivee = kilometrageArrivee;
 		this.limousine = limousine;
 	}
 	
@@ -51,9 +59,10 @@ public class Trajet {
 		System.out.println("Ville de depart : " + villeDepart);
 		System.out.println("Ville d'arrivee : " + villeArrivee);
 		System.out.println("Kilometrage de depart : " + kilometrageDepart);
-		//System.out.println("Kilmetrage d'arrivee : " + adresse);
+		//System.out.println("Kilometrage d'arrivee : " + adresse);
 		limousine.afficherCaracteristiques();
 		System.out.println("-----------------------------------------");
 		System.out.println();
 	}
+	
 }
